@@ -63,6 +63,7 @@ printf "\nInstallation will begin now\n"
 sleep 3
 printf "\nAdding Flathub:\n"
 #Adding Flathub as flatpak repo:
+sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 sleep 3
@@ -85,51 +86,18 @@ sudo printf "\n#I added for speed\nfastestmirror=True\nmax_parallel_downloads=4\
 #keepcache=True
 
 #For ascii art on terminal:
-git clone https://github.com/TheZoraiz/ascii-image-converter.git
-cd ascii-image-converter
+wget https://github.com/TheZoraiz/ascii-image-converter/releases/download/v1.13.1/ascii-image-converter_Linux_amd64_64bit.tar.gz
+tar xzf ascii-image-converter_Linux_amd64_64bit.tar.gz
+cd ascii-image-converter_Linux_amd64_64bit
 sudo cp ascii-image-converter /usr/local/bin/
 cd ~/
 
 
-#Creating and running the dnf script:
+sudo apt install ubuntu-restricted-extras
+sudo apt install ffmpeg vlc mpv mozilla-openh264 ufw wine htop neofetch cpufetch mozilla-ublock-origin.noarch bottles cheese libreoffice -y
+sudo apt install fritzing ktechlab kicad geany thonny qalculate-gtk octave octave-control octave-signal -y
+sudo apt install avr-binutils avr-gcc avr-gcc-c++ avr-libc avra avrdude -y
 
-touch dnf.sh
-echo "dnf update -y
-
-dnf install kernel-tools -y
-sed -i -e 's/performance/ondemand/g' /etc/sysconfig/cpupower
-sed -i -e 's/schedutil/ondemand/g' /etc/sysconfig/cpupower
-
-dnf install \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-  
-dnf install \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
-  
-dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel -y
-
-dnf install lame\* --exclude=lame-devel -y
-
-dnf group upgrade --with-optional Multimedia -y
-
-dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
-
-dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-
-dnf groupupdate sound-and-video -y
-dnf install rpmfusion-free-release-tainted -y
-dnf install libdvdcss -y
-dnf install rpmfusion-nonfree-release-tainted -y
-dnf install \*-firmware -y
-dnf group update core -y
-
-dnf install ffmpeg vlc mpv mozilla-openh264 ufw wine htop neofetch cpufetch mozilla-ublock-origin.noarch bottles cheese libreoffice -y
-dnf install fritzing ktechlab kicad geany thonny qalculate-gtk octave octave-control octave-signal -y
-dnf install avr-binutils avr-gcc avr-gcc-c++ avr-libc avra avrdude -y
-
- " > dnf.sh
-chmod +x ./dnf.sh
-sudo ./dnf.sh
 
 sleep 3
 printf "\nInstalling some Flatpaks:\n"
